@@ -40,7 +40,11 @@ public class UserDefaultsFeedStore: FeedStore {
 	
 	private let userDefaults = UserDefaults.standard
 	
-	public init() { }
+	private let storeKey: String
+	
+	public init(storeKey: String) {
+		self.storeKey = storeKey
+	}
 	
 	public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
 	}
@@ -48,13 +52,14 @@ public class UserDefaultsFeedStore: FeedStore {
 	public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
 		let cache = Cache(feed: feed, timestamp: timestamp)
 		if let data = try? JSONEncoder().encode(cache) {
-			userDefaults.setValue(data, forKey: "UserDefaultsFeedStore")
+			userDefaults.setValue(data, forKey: storeKey
+			)
 		}
 		completion(nil)
 	}
 	
 	public func retrieve(completion: @escaping RetrievalCompletion) {
-		guard let data = userDefaults.data(forKey: "UserDefaultsFeedStore"), let cache = try? JSONDecoder().decode(Cache.self, from: data) else {
+		guard let data = userDefaults.data(forKey: storeKey), let cache = try? JSONDecoder().decode(Cache.self, from: data) else {
 			return completion(.empty)
 		}
 		

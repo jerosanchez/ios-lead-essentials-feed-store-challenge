@@ -106,7 +106,7 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	// - MARK: Helpers
 	
 	private func makeSUT() -> FeedStore {
-		return UserDefaultsFeedStore()
+		return UserDefaultsFeedStore(storeKey: "UserDefaultsFeedStore")
 	}
 	
 	private func setupEmptyStoreState() {
