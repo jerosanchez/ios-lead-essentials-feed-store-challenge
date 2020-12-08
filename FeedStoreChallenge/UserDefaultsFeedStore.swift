@@ -47,6 +47,7 @@ public class UserDefaultsFeedStore: FeedStore {
 	}
 	
 	public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
+		userDefaults.removeObject(forKey: storeKey)
 		completion(nil)
 	}
 	
