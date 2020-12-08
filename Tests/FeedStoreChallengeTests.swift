@@ -19,6 +19,18 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	//
 	//  ***********************
 	
+	override func setUp() {
+		super.setUp()
+		
+		UserDefaults.standard.removeObject(forKey: "UserDefaultsFeedStore")
+	}
+	
+	override class func tearDown() {
+		UserDefaults.standard.removeObject(forKey: "UserDefaultsFeedStore")
+		
+		super.tearDown()
+	}
+	
 	func test_retrieve_deliversEmptyOnEmptyCache() {
 		let sut = makeSUT()
 		
@@ -32,9 +44,9 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	}
 	
 	func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
-		//		let sut = makeSUT()
-		//
-		//		assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
+		let sut = makeSUT()
+		
+		assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
 	}
 	
 	func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
