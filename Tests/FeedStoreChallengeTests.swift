@@ -106,7 +106,7 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	// - MARK: Helpers
 	
 	private func makeSUT() -> FeedStore {
-		return UserDefaultsFeedStore(storeKey: "UserDefaultsFeedStore")
+		return UserDefaultsFeedStore(storeKey: "\(type(of: self)).cache")
 	}
 	
 	private func setupEmptyStoreState() {
@@ -118,7 +118,7 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	}
 	
 	private func removeStoreKeyFromUserDefaults() {
-		UserDefaults.standard.removeObject(forKey: "UserDefaultsFeedStore")
+		UserDefaults.standard.removeObject(forKey: "\(type(of: self)).cache")
 	}
 }
 
