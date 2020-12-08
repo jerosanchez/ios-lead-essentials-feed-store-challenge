@@ -22,11 +22,11 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	override func setUp() {
 		super.setUp()
 		
-		UserDefaults.standard.removeObject(forKey: "UserDefaultsFeedStore")
+		setupEmptyStoreState()
 	}
 	
-	override class func tearDown() {
-		UserDefaults.standard.removeObject(forKey: "UserDefaultsFeedStore")
+	override func tearDown() {
+		undoStoreSideEffects()
 		
 		super.tearDown()
 	}
@@ -109,6 +109,17 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 		return UserDefaultsFeedStore()
 	}
 	
+	private func setupEmptyStoreState() {
+		removeStoreKeyFromUserDefaults()
+	}
+	
+	private func undoStoreSideEffects() {
+		removeStoreKeyFromUserDefaults()
+	}
+	
+	private func removeStoreKeyFromUserDefaults() {
+		UserDefaults.standard.removeObject(forKey: "UserDefaultsFeedStore")
+	}
 }
 
 //  ***********************
