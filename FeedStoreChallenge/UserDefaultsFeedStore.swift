@@ -37,13 +37,13 @@ public class UserDefaultsFeedStore: FeedStore {
 			self.url = url
 		}
 	}
-	
-	private let userDefaults = UserDefaults.standard
-	
+		
 	private let storeKey: String
-	
-	public init(storeKey: String) {
+	private let userDefaults: UserDefaults
+
+	public init(storeKey: String, userDefaults: UserDefaults = UserDefaults.standard) {
 		self.storeKey = storeKey
+		self.userDefaults = userDefaults
 	}
 	
 	public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
